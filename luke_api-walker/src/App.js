@@ -39,7 +39,7 @@ function App() {
       {
         select === "people"?
         <div>
-          <h2>{output["name"]}</h2>
+          <h2>Name: {output["name"]}</h2>
           <p>Height: {output["height"]}</p>
           <p>Mass: {output["mass"]}</p>
           <p>Hair Color: {output["hair_color"]}</p>
@@ -50,7 +50,7 @@ function App() {
       {
         select === "planets"?
         <div>
-          <h2>{output["name"]}</h2>
+          <h2>Name: {output["name"]}</h2>
           <p>Climate: {output["climate"]}</p>
           <p>Terrain: {output["terrain"]}</p>
           <p>Surface Water: {output["surface_water"]}</p>

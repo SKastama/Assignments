@@ -5,7 +5,7 @@ const port = 8000;
 
 class User {
     constructor() {
-        // this.id = faker.datatype.number();
+        this.id = `${faker.mersenne.rand()}`;
         this.firstName = faker.name.firstName();
         this.lastName = faker.name.lastName();
         this.phoneNumber = faker.phone.phoneNumber();
@@ -15,7 +15,7 @@ class User {
 }
 class Company {
     constructor() {
-        // this.id = `${faker.datatype.number()}`;
+        this.id = `${faker.mersenne.rand()}`;
         this.name = faker.company.companyName();
         this.streetAddress = faker.address.streetAddress();
         this.cityName = faker.address.cityName();
@@ -34,7 +34,7 @@ app.get("/api/companies/new", (req, res) => {
 });
 
 app.get("/api/user/company", (req, res) => {
-    res.json( new User(), new Company() );
+    res.json( [new User(), new Company()] );
 });
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));

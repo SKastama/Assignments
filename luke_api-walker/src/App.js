@@ -4,14 +4,12 @@ import axios from 'axios';
 
 
 function App() {
-  const [people, setPeople] = useState([]);
-  const [planets, setPlanets] = useState([]);
+  const [output, setOutput] = useState({});
   const [select, setSelect] = useState("");
   const [id, setId] = useState(""); 
 
   const datatype = (e) => {
     setSelect(e.target.value);
-    console.log(select);
   }
   const dataId = (e) => {
     if (!isNaN(e.target.value)) {
@@ -20,14 +18,9 @@ function App() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (select === "people") {
-      axios.get(`https://swapi.dev/api/people/${id}`)
-        .then(response => {setPeople(response.data.results)})
-    }
-    if (select === "planets") {
-      axios.get(`https://swapi.dev/api/planets/${id}`)
-      .then(response => {setPlanets(response.data.results)})
-    }
+    axios.get(`https://swapi.dev/api/${select}/${id}`)
+      .then(response => {setOutput(response.data)})
+      .catch(error => {console.log(error)});
     setId("");
   }
 
@@ -36,27 +29,35 @@ function App() {
       <form onSubmit={handleSubmit}>
         <span>Search for: </span>
         <select onChange={datatype}>
-          <option value={people}>people</option>
-          <option value={planets}>planets</option>
+          <option value="people">people</option>
+          <option value="planets">planets</option>
         </select>
         <label> ID: </label>
         <input type="text" value={id} onChange={dataId}/>
         <input type="submit" value="Search"/>
       </form>
-      <div>
-        <h2>{people.name}</h2>
-        <p>Height: {people.height}</p>
-        <p>Mass: {people.mass}</p>
-        <p>Hair Color: {people.hair_color}</p>
-        <p>Skin Color: {people.skin_color}</p>
-      </div>
-      {/* <div>
-        <h2>{planets.name}</h2>
-        <p>Height: {planets.height}</p>
-        <p>Mass: {planets.mass}</p>
-        <p>Hair Color: {planets.hair_color}</p>
-        <p>Skin Color: {planets.skin_color}</p>
-      </div> */}
+      {
+        select === "people"?
+        <div>
+          <h2>{output["name"]}</h2>
+          <p>Height: {output["height"]}</p>
+          <p>Mass: {output["mass"]}</p>
+          <p>Hair Color: {output["hair_color"]}</p>
+          <p>Skin Color: {output["skin_color"]}</p>
+        </div> :
+        <div></div>
+      }
+      {
+        select === "planets"?
+        <div>
+          <h2>{output["name"]}</h2>
+          <p>Climate: {output["climate"]}</p>
+          <p>Terrain: {output["terrain"]}</p>
+          <p>Surface Water: {output["surface_water"]}</p>
+          <p>Population: {output["population"]}</p>
+        </div> :
+        <div></div>
+      }
     </div>
   );
 }

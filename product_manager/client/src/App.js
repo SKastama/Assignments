@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Main from './views/Main';
 import Details from './views/Details';
+import Update from './views/Update';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route path="/:id">
           <Details/>
+        </Route>
+        <Route path="/:id/edit">
+          <Update />
         </Route>
       </Switch>
     </div>

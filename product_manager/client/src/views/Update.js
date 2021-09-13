@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
     
 const Update = (props) => {
     const { id } = useParams();
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
+    const history = useHistory();
     
     useEffect(() => {
         axios.get('http://localhost:8000/api/product/' + id)
@@ -24,7 +25,10 @@ const Update = (props) => {
             price,
             description
         })
-            .then(res => console.log(res));
+            .then(res => console.log(res))
+            .catch(err => console.error(err));
+        let path = `${id}`; 
+        history.push(path);
     }
     
     return (
@@ -32,17 +36,18 @@ const Update = (props) => {
             <h1>Update Product:</h1>
             <div>
                 <label>Title</label>
-                <input type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                <input type="text" name="title" value={title} onChange={(e) => { setTitle(e.target.value) }} />
             </div>
             <div>
                 <label>Price</label>
-                <input type="number" value={price} onChange={(e) => { setPrice(e.target.value) }} />
+                <input type="number" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} />
             </div>
             <p>
                 <label>Description</label>
-                <input type="text" value={description} onChange={(e) => { setDescription(e.target.value) }} />
+                <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
             </p>
             <input type="submit" />
+            <p><Link to="/">Home</Link></p>
         </form>
     )
 }

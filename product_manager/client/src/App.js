@@ -9,18 +9,18 @@ import Details from './views/Details';
 
 function App() {
   return (
-      <BrowserRouter>
-        <div className="App">
-          <Switch>
-            <Route exact path="/">
-              <Main/>
-            </Route>
-            <Route path="/:id">
-              <Details/>
-            </Route>
-          </Switch>
-        </div>
-      </BrowserRouter>
+    <BrowserRouter>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Main/>
+          </Route>
+          <Route path="/:id">
+            <Details/>
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 export default App;

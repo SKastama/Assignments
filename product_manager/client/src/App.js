@@ -10,7 +10,7 @@ import Details from './views/Details';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App" style={{ margin: "1em 3em 1em 3em" }}>
         <Switch>
           <Route exact path="/">
             <Main/>

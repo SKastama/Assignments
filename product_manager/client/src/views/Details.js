@@ -11,7 +11,7 @@ const Detail = (props) => {
         axios.get('http://localhost:8000/api/product/' + id)
         .then(res => setProduct(res.data))
         .catch(err => console.error(err));
-    }, []);
+    }, [id]);
     
     const deleteProduct = (id) => {
         axios.delete('http://localhost:8000/api/product/' + id)

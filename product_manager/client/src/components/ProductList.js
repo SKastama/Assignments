@@ -1,12 +1,15 @@
 import React from "react";
+import { BrowserRouter, Link } from "react-router-dom";
 
 const ProductList = (props) => {
     return(
-        <div>
-            {props.product.map((product, index) => 
-                <p key={index}>{product.title}, {product.price}, {product.description}</p>
-            )}
-        </div>
+        <BrowserRouter>
+            <div>
+                {props.product.map((product, index) => 
+                    <p><Link to={`/${product._id}`} key={index}>{product.title}</Link></p>
+                )}
+            </div>
+        </BrowserRouter>
     )
 }
 

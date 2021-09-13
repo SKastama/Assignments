@@ -15,6 +15,9 @@ function App() {
             <Route exact path="/">
               <Main/>
             </Route>
+            <Route path="/:id">
+              <Details/>
+            </Route>
           </Switch>
         </div>
       </BrowserRouter>

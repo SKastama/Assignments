@@ -31,8 +31,12 @@ const UpdateAuthor = (props) => {
                 history.push(path);
             })
             .catch(err => {
-                setErrors(err.response.data.errors);
-                console.log(err.response);
+                const errorResponse = err.response.data.errors; 
+                const errorArr = []; 
+                for (const key of Object.keys(errorResponse)) { 
+                    errorArr.push(errorResponse[key].message)
+                }
+                setErrors(errorArr);
             })
     }
     
@@ -43,9 +47,7 @@ const UpdateAuthor = (props) => {
             <p><Link to="/">Home</Link></p>
             <p>Edit this Author:</p>
             <form onSubmit={updateAuthor}>
-            {errors.name && (
-                <span className="text-danger"> {errors?.description?.message}</span>
-            )}
+                {errors.map((err, index) => <p key={index}>{err}</p>)}
                 <label>Name</label>
                 <input type="text" name="name" value={author.name} onChange={handleOnChange}/>
                 <input type="submit"/>

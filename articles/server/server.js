@@ -7,7 +7,7 @@ require("./config/mongoose.config")(db_name);
 app.use(cors())
 app.use(express.json(), express.urlencoded({ extended: true }));
 
-require('./server/routes/articles.routes')(app);
+require('./routes/articles.routes')(app);
 
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));
